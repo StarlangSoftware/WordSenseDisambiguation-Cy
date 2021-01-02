@@ -6,7 +6,7 @@ setup(
                            "WordSenseDisambiguation/AutoProcessor/Sentence/*.pyx"],
                           compiler_directives={'language_level': "3"}),
     name='NlpToolkit-WordSenseDisambiguation-Cy',
-    version='1.0.0',
+    version='1.0.1',
     packages=['WordSenseDisambiguation', 'WordSenseDisambiguation.AutoProcessor',
               'WordSenseDisambiguation.AutoProcessor.Sentence', 'WordSenseDisambiguation.AutoProcessor.ParseTree'],
     package_data={'WordSenseDisambiguation.AutoProcessor.ParseTree': ['*.pxd', '*.pyx', '*.c', '*.py'],
@@ -15,5 +15,6 @@ setup(
     license='',
     author='olcaytaner',
     author_email='olcay.yildiz@ozyegin.edu.tr',
-    description='Word Sense Disambiguation Library'
+    description='Word Sense Disambiguation Library',
+    install_requires = ['NlpToolkit-AnnotatedSentence-Cy', 'NlpToolkit-AnnotatedTree-Cy']
 )
