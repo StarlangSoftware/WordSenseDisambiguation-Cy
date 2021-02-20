@@ -6,7 +6,7 @@ setup(
                            "WordSenseDisambiguation/AutoProcessor/Sentence/*.pyx"],
                           compiler_directives={'language_level': "3"}),
     name='NlpToolkit-WordSenseDisambiguation-Cy',
-    version='1.0.1',
+    version='1.0.2',
     packages=['WordSenseDisambiguation', 'WordSenseDisambiguation.AutoProcessor',
               'WordSenseDisambiguation.AutoProcessor.Sentence', 'WordSenseDisambiguation.AutoProcessor.ParseTree'],
     package_data={'WordSenseDisambiguation.AutoProcessor.ParseTree': ['*.pxd', '*.pyx', '*.c', '*.py'],

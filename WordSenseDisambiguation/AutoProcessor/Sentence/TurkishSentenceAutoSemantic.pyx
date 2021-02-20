@@ -2,7 +2,7 @@ from MorphologicalAnalysis.FsmMorphologicalAnalyzer cimport FsmMorphologicalAnal
 from WordNet.WordNet cimport WordNet
 from AnnotatedSentence.AnnotatedSentence cimport AnnotatedSentence
 from AnnotatedSentence.AnnotatedWord cimport AnnotatedWord
-from AnnotatedSentence.AutoProcessor.AutoSemantic.SentenceAutoSemantic cimport SentenceAutoSemantic
+from WordSenseDisambiguation.AutoProcessor.Sentence.SentenceAutoSemantic cimport SentenceAutoSemantic
 
 
 cdef class TurkishAutoSemantic(SentenceAutoSemantic):
@@ -25,7 +25,7 @@ cdef class TurkishAutoSemantic(SentenceAutoSemantic):
         self.__turkishWordNet = turkishWordNet
         self.__fsm = fsm
 
-    cpdef autoLabelSingleSemantics(self, AnnotatedSentence sentence):
+    cpdef bint autoLabelSingleSemantics(self, AnnotatedSentence sentence):
         """
         The method checks
         1. the previous two words and the current word; the previous, current and next word, current and the next
@@ -111,3 +111,4 @@ cdef class TurkishAutoSemantic(SentenceAutoSemantic):
                                                                   self.__fsm)
                 if current.getSemantic() is None and len(meanings) == 1:
                     current.setSemantic(meanings[0].getId())
+        return True
