@@ -4,7 +4,7 @@ from AnnotatedSentence.AnnotatedCorpus import AnnotatedCorpus
 from MorphologicalAnalysis.FsmMorphologicalAnalyzer import FsmMorphologicalAnalyzer
 from WordNet.WordNet import WordNet
 
-from WordSenseDisambiguation.Sentence.Lesk import Lesk
+from WordSenseDisambiguation.AutoProcessor.Sentence.Lesk import Lesk
 
 
 class TestLesk(unittest.TestCase):

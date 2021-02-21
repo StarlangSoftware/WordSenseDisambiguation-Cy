@@ -4,7 +4,7 @@ from AnnotatedSentence.AnnotatedCorpus import AnnotatedCorpus
 from MorphologicalAnalysis.FsmMorphologicalAnalyzer import FsmMorphologicalAnalyzer
 from WordNet.WordNet import WordNet
 
-from WordSenseDisambiguation.Sentence.RandomSentenceAutoSemantic import RandomSentenceAutoSemantic
+from WordSenseDisambiguation.AutoProcessor.Sentence.RandomSentenceAutoSemantic import RandomSentenceAutoSemantic
 
 class TestRandom(unittest.TestCase):
 

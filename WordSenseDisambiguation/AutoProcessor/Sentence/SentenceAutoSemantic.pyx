@@ -1,3 +1,5 @@
+from AnnotatedSentence.AnnotatedWord cimport AnnotatedWord
+
 cdef class SentenceAutoSemantic:
 
     cpdef bint autoLabelSingleSemantics(self, AnnotatedSentence sentence):
@@ -12,6 +14,8 @@ cdef class SentenceAutoSemantic:
         pass
 
     cpdef list getCandidateSynSets(self, WordNet wordNet, FsmMorphologicalAnalyzer fsm, AnnotatedSentence sentence, int index):
+        cdef AnnotatedWord twoPrevious, previous, twoNext, next, current
+        cdef list synSets
         twoPrevious = None
         previous = None
         twoNext = None

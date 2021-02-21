@@ -7,7 +7,7 @@ from AnnotatedTree.TreeBankDrawable import TreeBankDrawable
 from MorphologicalAnalysis.FsmMorphologicalAnalyzer import FsmMorphologicalAnalyzer
 from WordNet.WordNet import WordNet
 
-from WordSenseDisambiguation.ParseTree.RandomTreeAutoSemantic import RandomTreeAutoSemantic
+from WordSenseDisambiguation.AutoProcessor.ParseTree.RandomTreeAutoSemantic import RandomTreeAutoSemantic
 
 
 class TestRandom(unittest.TestCase):

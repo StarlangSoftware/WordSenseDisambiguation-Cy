@@ -7,7 +7,7 @@ from AnnotatedTree.TreeBankDrawable import TreeBankDrawable
 from MorphologicalAnalysis.FsmMorphologicalAnalyzer import FsmMorphologicalAnalyzer
 from WordNet.WordNet import WordNet
 
-from WordSenseDisambiguation.ParseTree.Lesk import Lesk
+from WordSenseDisambiguation.AutoProcessor.ParseTree.Lesk import Lesk
 
 
 class TestLesk(unittest.TestCase):

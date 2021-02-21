@@ -1,9 +1,13 @@
+from AnnotatedTree.LayerInfo cimport LayerInfo
+
 cdef class TreeAutoSemantic:
 
     cpdef bint autoLabelSingleSemantics(self, ParseTreeDrawable parseTree):
         pass
 
     cpdef list getCandidateSynSets(self, WordNet wordNet, FsmMorphologicalAnalyzer fsm, list leafList, int index):
+        cdef LayerInfo twoPrevious, previous, twoNext, next, current
+        cdef list synSets
         twoPrevious = None
         previous = None
         twoNext = None

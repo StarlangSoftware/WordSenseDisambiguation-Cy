@@ -7,7 +7,7 @@ from AnnotatedTree.TreeBankDrawable import TreeBankDrawable
 from MorphologicalAnalysis.FsmMorphologicalAnalyzer import FsmMorphologicalAnalyzer
 from WordNet.WordNet import WordNet
 
-from WordSenseDisambiguation.ParseTree.MostFrequentTreeAutoSemantic import MostFrequentTreeAutoSemantic
+from WordSenseDisambiguation.AutoProcessor.ParseTree.MostFrequentTreeAutoSemantic import MostFrequentTreeAutoSemantic
 
 
 class TestMostFrequent(unittest.TestCase):

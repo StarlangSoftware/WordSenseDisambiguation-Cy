@@ -4,7 +4,7 @@ from AnnotatedSentence.AnnotatedCorpus import AnnotatedCorpus
 from MorphologicalAnalysis.FsmMorphologicalAnalyzer import FsmMorphologicalAnalyzer
 from WordNet.WordNet import WordNet
 
-from WordSenseDisambiguation.Sentence.MostFrequentSentenceAutoSemantic import MostFrequentSentenceAutoSemantic
+from WordSenseDisambiguation.AutoProcessor.Sentence.MostFrequentSentenceAutoSemantic import MostFrequentSentenceAutoSemantic
 
 
 class MostFrequent(unittest.TestCase):
