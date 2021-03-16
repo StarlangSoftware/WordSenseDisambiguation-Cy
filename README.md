@@ -26,6 +26,15 @@ The following Table shows an example for the word 'yüz', which can refer to the
 4. Build the [Java](https://github.com/starlangsoftware/WordSenseDisambiguation) project and put the generated sentence-semantics.jar file into another folder such as *Program*.
 5. Put *Turkish-Phrase* and *Program* folders into a parent folder.
 
+### Annotation
+
+1. Open sentence-semantics.jar file.
+2. Wait until the data load message is displayed.
+3. Click Open button in the Project menu.
+4. Choose a file for annotation from the folder *Turkish-Phrase*.  
+5. For each word in the sentence, click the word, and choose correct sense for that word.
+6. Click one of the next buttons to go to other files.
+
 ## Classification DataSet Generation
 
 After annotating sentences, you can use [DataGenerator](https://github.com/starlangsoftware/DataGenerator-Cy) package to generate classification dataset for the Word Sense Disambiguation task.
