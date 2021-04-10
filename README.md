@@ -46,7 +46,7 @@ After generating the classification dataset as above, one can use the [Classific
 For Developers
 ============
 You can also see either [Python](https://github.com/starlangsoftware/WordSenseDisambiguation-Py), [Java](https://github.com/starlangsoftware/WordSenseDisambiguation),
-[C++](https://github.com/starlangsoftware/WordSenseDisambiguation-CPP), or [C#](https://github.com/starlangsoftware/WordSenseDisambiguation-CS) repository.
+[C++](https://github.com/starlangsoftware/WordSenseDisambiguation-CPP), [Swift](https://github.com/starlangsoftware/WordSenseDisambiguation-Swift), or [C#](https://github.com/starlangsoftware/WordSenseDisambiguation-CS) repository.
 
 ## Requirements
 
