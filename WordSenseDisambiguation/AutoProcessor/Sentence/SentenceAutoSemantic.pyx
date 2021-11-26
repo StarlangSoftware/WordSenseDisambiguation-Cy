@@ -52,5 +52,4 @@ cdef class SentenceAutoSemantic:
         return synSets
 
     cpdef autoSemantic(self, AnnotatedSentence sentence):
-        if self.autoLabelSingleSemantics(sentence):
-            sentence.save()
+        self.autoLabelSingleSemantics(sentence)

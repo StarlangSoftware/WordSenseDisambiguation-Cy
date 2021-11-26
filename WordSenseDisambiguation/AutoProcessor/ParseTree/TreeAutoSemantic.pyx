@@ -44,5 +44,4 @@ cdef class TreeAutoSemantic:
         return synSets
 
     cpdef autoSemantic(self, ParseTreeDrawable parseTree):
-        if self.autoLabelSingleSemantics(parseTree):
-            parseTree.saveWithFileName()
+        self.autoLabelSingleSemantics(parseTree)
