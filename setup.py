@@ -2,7 +2,7 @@ from setuptools import setup
 
 from pathlib import Path
 this_directory = Path(__file__).parent
-long_description = (this_directory / "README.md").read_text()
+long_description = (this_directory / "README.md").read_text(encoding="utf-8")
 from Cython.Build import cythonize
 
 setup(
@@ -10,7 +10,7 @@ setup(
                            "WordSenseDisambiguation/AutoProcessor/Sentence/*.pyx"],
                           compiler_directives={'language_level': "3"}),
     name='NlpToolkit-WordSenseDisambiguation-Cy',
-    version='1.0.3',
+    version='1.0.4',
     packages=['WordSenseDisambiguation', 'WordSenseDisambiguation.AutoProcessor',
               'WordSenseDisambiguation.AutoProcessor.Sentence', 'WordSenseDisambiguation.AutoProcessor.ParseTree'],
     package_data={'WordSenseDisambiguation.AutoProcessor.ParseTree': ['*.pxd', '*.pyx', '*.c', '*.py'],
@@ -20,7 +20,7 @@ setup(
     author='olcaytaner',
     author_email='olcay.yildiz@ozyegin.edu.tr',
     description='Word Sense Disambiguation Library',
-    install_requires = ['NlpToolkit-AnnotatedSentence-Cy', 'NlpToolkit-AnnotatedTree-Cy'],
+    install_requires = ['NlpToolkit-AnnotatedTree-Cy'],
     long_description=long_description,
     long_description_content_type='text/markdown'
 )
