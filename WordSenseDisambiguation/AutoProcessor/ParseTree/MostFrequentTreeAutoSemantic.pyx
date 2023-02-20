@@ -9,40 +9,40 @@ from WordSenseDisambiguation.AutoProcessor.ParseTree.TreeAutoSemantic cimport Tr
 
 cdef class MostFrequentTreeAutoSemantic(TreeAutoSemantic):
 
-    cpdef WordNet __turkishWordNet
+    cpdef WordNet __turkish_wordnet
     cpdef FsmMorphologicalAnalyzer __fsm
 
     def __init__(self, turkishWordNet: WordNet, fsm: FsmMorphologicalAnalyzer):
         self.__fsm = fsm
-        self.__turkishWordNet = turkishWordNet
+        self.__turkish_wordnet = turkishWordNet
 
     cpdef SynSet mostFrequent(self, list synSets, str root):
         cdef SynSet synSet, best
-        cdef int minSense, i
+        cdef int min_sense, i
         if len(synSets) == 1:
             return synSets[0]
-        minSense = 50
+        min_sense = 50
         best = None
-        for synSet in synSets:
-            for i in range(synSet.getSynonym().literalSize()):
-                if synSet.getSynonym().getLiteral(i).getName().lower().startswith(root) or synSet.getSynonym().getLiteral(i).getName().lower().endswith(" " + root):
-                    if synSet.getSynonym().getLiteral(i).getSense() < minSense:
-                        minSense = synSet.getSynonym().getLiteral(i).getSense()
-                        best = synSet
+        for syn_set in synSets:
+            for i in range(syn_set.getSynonym().literalSize()):
+                if syn_set.getSynonym().getLiteral(i).getName().lower().startswith(root) or syn_set.getSynonym().getLiteral(i).getName().lower().endswith(" " + root):
+                    if syn_set.getSynonym().getLiteral(i).getSense() < min_sense:
+                        min_sense = syn_set.getSynonym().getLiteral(i).getSense()
+                        best = syn_set
         return best
 
     cpdef bint autoLabelSingleSemantics(self, ParseTreeDrawable parseTree):
-        cdef NodeDrawableCollector nodeDrawableCollector
+        cdef NodeDrawableCollector node_drawable_collector
         cdef int i
-        cdef list leafList
-        cdef list synSets
+        cdef list leaf_list
+        cdef list syn_sets
         cdef SynSet best
-        nodeDrawableCollector = NodeDrawableCollector(parseTree.getRoot(), IsTurkishLeafNode())
-        leafList = nodeDrawableCollector.collect()
-        for i in range(len(leafList)):
-            synSets = self.getCandidateSynSets(self.__turkishWordNet, self.__fsm, leafList, i)
-            if len(synSets) > 0:
-                best = self.mostFrequent(synSets, leafList[i].getLayerInfo().getMorphologicalParseAt(0).getWord().getName())
+        node_drawable_collector = NodeDrawableCollector(parseTree.getRoot(), IsTurkishLeafNode())
+        leaf_list = node_drawable_collector.collect()
+        for i in range(len(leaf_list)):
+            syn_sets = self.getCandidateSynSets(self.__turkish_wordnet, self.__fsm, leaf_list, i)
+            if len(syn_sets) > 0:
+                best = self.mostFrequent(syn_sets, leaf_list[i].getLayerInfo().getMorphologicalParseAt(0).getWord().getName())
                 if best is not None:
-                    leafList[i].getLayerInfo().setLayerData(ViewLayerType.SEMANTICS, best.getId())
+                    leaf_list[i].getLayerInfo().setLayerData(ViewLayerType.SEMANTICS, best.getId())
         return True

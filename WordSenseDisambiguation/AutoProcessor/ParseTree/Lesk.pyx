@@ -12,12 +12,12 @@ from WordSenseDisambiguation.AutoProcessor.ParseTree.TreeAutoSemantic cimport Tr
 
 cdef class Lesk(TreeAutoSemantic):
 
-    cpdef WordNet __turkishWordNet
+    cpdef WordNet __turkish_wordnet
     cpdef FsmMorphologicalAnalyzer __fsm
 
     def __init__(self, turkishWordNet: WordNet, fsm: FsmMorphologicalAnalyzer):
         self.__fsm = fsm
-        self.__turkishWordNet = turkishWordNet
+        self.__turkish_wordnet = turkishWordNet
 
     cpdef int intersection(self, SynSet synSet, list leafList):
         cdef list words1
@@ -39,30 +39,30 @@ cdef class Lesk(TreeAutoSemantic):
         return count
 
     cpdef bint autoLabelSingleSemantics(self, ParseTreeDrawable parseTree):
-        cdef int i, maxIntersection, j, intersectionCount
-        cdef list leafList
+        cdef int i, max_intersection, j, intersection_count
+        cdef list leaf_list
         cdef bint done
-        cdef NodeDrawableCollector nodeDrawableCollector
-        cdef list synSets, maxSynSets
+        cdef NodeDrawableCollector node_drawable_collector
+        cdef list syn_sets, max_syn_sets
         cdef SynSet synSet
         random.seed(1)
-        nodeDrawableCollector = NodeDrawableCollector(parseTree.getRoot(), IsTurkishLeafNode())
-        leafList = nodeDrawableCollector.collect()
+        node_drawable_collector = NodeDrawableCollector(parseTree.getRoot(), IsTurkishLeafNode())
+        leaf_list = node_drawable_collector.collect()
         done = False
-        for i in range(len(leafList)):
-            synSets = self.getCandidateSynSets(self.__turkishWordNet, self.__fsm, leafList, i)
-            maxIntersection = -1
-            for j in range(len(synSets)):
-                synSet = synSets[j]
-                intersectionCount = self.intersection(synSet, leafList)
-                if intersectionCount > maxIntersection:
-                    maxIntersection = intersectionCount
-            maxSynSets = []
-            for j in range(len(synSets)):
-                synSet = synSets[j]
-                if self.intersection(synSet,leafList) == maxIntersection:
-                    maxSynSets.append(synSet)
-            if len(maxSynSets) > 0:
-                leafList[i].getLayerInfo().setLayerData(ViewLayerType.SEMANTICS, maxSynSets[randrange(len(maxSynSets))].getId())
+        for i in range(len(leaf_list)):
+            syn_sets = self.getCandidateSynSets(self.__turkish_wordnet, self.__fsm, leaf_list, i)
+            max_intersection = -1
+            for j in range(len(syn_sets)):
+                syn_set = syn_sets[j]
+                intersection_count = self.intersection(syn_set, leaf_list)
+                if intersection_count > max_intersection:
+                    max_intersection = intersection_count
+            max_syn_sets = []
+            for j in range(len(syn_sets)):
+                syn_set = syn_sets[j]
+                if self.intersection(syn_set,leaf_list) == max_intersection:
+                    max_syn_sets.append(syn_set)
+            if len(max_syn_sets) > 0:
+                leaf_list[i].getLayerInfo().setLayerData(ViewLayerType.SEMANTICS, max_syn_sets[randrange(len(max_syn_sets))].getId())
                 done = True
         return done

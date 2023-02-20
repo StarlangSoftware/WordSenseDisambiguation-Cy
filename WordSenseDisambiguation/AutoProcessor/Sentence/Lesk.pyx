@@ -9,12 +9,12 @@ from WordSenseDisambiguation.AutoProcessor.Sentence.SentenceAutoSemantic cimport
 
 cdef class Lesk(SentenceAutoSemantic):
 
-    cpdef WordNet __turkishWordNet
+    cpdef WordNet __turkish_wordnet
     cpdef FsmMorphologicalAnalyzer __fsm
 
     def __init__(self, turkishWordNet: WordNet, fsm: FsmMorphologicalAnalyzer):
         self.__fsm = fsm
-        self.__turkishWordNet = turkishWordNet
+        self.__turkish_wordnet = turkishWordNet
 
     cpdef int intersection(self, SynSet synSet, AnnotatedSentence sentence):
         cdef list words1, words2
@@ -34,25 +34,25 @@ cdef class Lesk(SentenceAutoSemantic):
 
     cpdef bint autoLabelSingleSemantics(self, sentence: AnnotatedSentence):
         cdef bint done
-        cdef int i, j, maxIntersection, intersectionCount
-        cdef list synSets, maxSynSets
-        cdef SynSet synSet
+        cdef int i, j, max_intersection, intersection_count
+        cdef list syn_sets, max_syn_sets
+        cdef SynSet syn_set
         random.seed(1)
         done = False
         for i in range(sentence.wordCount()):
-            synSets = self.getCandidateSynSets(self.__turkishWordNet, self.__fsm, sentence, i)
-            maxIntersection = -1
-            for j in range(len(synSets)):
-                synSet = synSets[j]
-                intersectionCount = self.intersection(synSet, sentence)
-                if intersectionCount > maxIntersection:
-                    maxIntersection = intersectionCount
-            maxSynSets = []
-            for j in range(len(synSets)):
-                synSet = synSets[j]
-                if self.intersection(synSet, sentence) == maxIntersection:
-                    maxSynSets.append(synSet)
-            if len(maxSynSets) > 0:
+            syn_sets = self.getCandidateSynSets(self.__turkish_wordnet, self.__fsm, sentence, i)
+            max_intersection = -1
+            for j in range(len(syn_sets)):
+                syn_set = syn_sets[j]
+                intersection_count = self.intersection(syn_set, sentence)
+                if intersection_count > max_intersection:
+                    max_intersection = intersection_count
+            max_syn_sets = []
+            for j in range(len(syn_sets)):
+                syn_set = syn_sets[j]
+                if self.intersection(syn_set, sentence) == max_intersection:
+                    max_syn_sets.append(syn_set)
+            if len(max_syn_sets) > 0:
                 done = True
-                sentence.getWord(i).setSemantic(maxSynSets[randrange(len(maxSynSets))].getId())
+                sentence.getWord(i).setSemantic(max_syn_sets[randrange(len(max_syn_sets))].getId())
         return done
