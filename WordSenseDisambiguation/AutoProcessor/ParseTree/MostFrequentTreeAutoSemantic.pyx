@@ -13,10 +13,25 @@ cdef class MostFrequentTreeAutoSemantic(TreeAutoSemantic):
     cpdef FsmMorphologicalAnalyzer __fsm
 
     def __init__(self, turkishWordNet: WordNet, fsm: FsmMorphologicalAnalyzer):
+        """
+        Constructor for the {@link MostFrequentTreeAutoSemantic} class. Gets the Turkish wordnet and Turkish fst based
+        morphological analyzer from the user and sets the corresponding attributes.
+        :param turkishWordNet: Turkish wordnet
+        :param fsm: Turkish morphological analyzer
+        """
         self.__fsm = fsm
         self.__turkish_wordnet = turkishWordNet
 
     cpdef SynSet mostFrequent(self, list synSets, str root):
+        """
+        Returns the most frequent root word in the given synsets. In the wordnet, literals are ordered and indexed
+        according to their usage. The most frequently used sense of the literal has sense number 1, then 2, etc. In order
+        to get literal from root word, the algorithm checks root for a prefix and suffix. So, if the root is a prefix or
+        suffix of a literal, it is included in the search.
+        :param synSets: All possible synsets to search for most frequent literal.
+        :param root: Root word to be checked.
+        :return: Synset storing most frequent literal either starting or ending with the given root form.
+        """
         cdef SynSet synSet, best
         cdef int min_sense, i
         if len(synSets) == 1:
@@ -32,6 +47,15 @@ cdef class MostFrequentTreeAutoSemantic(TreeAutoSemantic):
         return best
 
     cpdef bint autoLabelSingleSemantics(self, ParseTreeDrawable parseTree):
+        """
+        The method annotates the word senses of the words in the parse tree according to the baseline most frequent
+        algorithm. The algorithm processes target words one by one. First, the algorithm constructs an array of
+        all possible senses for the target word to annotate. Then the sense with the minimum sense index is selected. In
+        the wordnet, literals are ordered and indexed according to their usage. The most frequently used sense of the
+        literal has sense number 1, then 2, etc.
+        :param parseTree: Parse tree to be annotated.
+        :return: True, if at least one word is semantically annotated, false otherwise.
+        """
         cdef NodeDrawableCollector node_drawable_collector
         cdef int i
         cdef list leaf_list
