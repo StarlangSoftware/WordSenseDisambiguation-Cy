@@ -9,8 +9,8 @@ from WordSenseDisambiguation.AutoProcessor.ParseTree.TreeAutoSemantic cimport Tr
 
 cdef class MostFrequentTreeAutoSemantic(TreeAutoSemantic):
 
-    cpdef WordNet __turkish_wordnet
-    cpdef FsmMorphologicalAnalyzer __fsm
+    cdef WordNet __turkish_wordnet
+    cdef FsmMorphologicalAnalyzer __fsm
 
     def __init__(self, turkishWordNet: WordNet, fsm: FsmMorphologicalAnalyzer):
         """
